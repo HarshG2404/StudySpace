@@ -170,3 +170,56 @@ footer {
   margin-top: 50px;
   font-size: 14px;
 }
+.ai-container {
+  max-width: 700px;
+  margin: 60px auto;
+  text-align: center;
+}
+
+.chat-box {
+  background: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.messages {
+  height: 300px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.message {
+  margin: 8px 0;
+}
+
+.input-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+#user-input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#send-btn {
+  background: #4a6cf7;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#send-btn:hover {
+  background: #3453c5;
+}
+
