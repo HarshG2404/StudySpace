@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudySpace AI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo-container">
+        <img src="LOGO.png" alt="StudySpace Logo" class="logo">
+        <h1>StudySpace</h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="material.html">Material</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="ai.html" class="active">StudySpace AI</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="ai-container">
+    <h2>StudySpace AI Assistant 🤖</h2>
+    <p class="ai-subtitle">Ask any question or clear your doubts instantly.</p>
+
+    <div class="chat-box" id="chat-box">
+      <div class="messages" id="messages"></div>
+      <div class="input-container">
+        <input type="text" id="user-input" placeholder="Type your question..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 StudySpace | Built for learners</p>
+  </footer>
+
+  <script>
+    const API_URL = "https://YOUR-BACKEND-NAME.vercel.app/chat"; // replace this
+
+    const sendBtn = document.getElementById('send-btn');
+    const userInput = document.getElementById('user-input');
+    const messages = document.getElementById('messages');
+
+    async function sendMessage() {
+      const text = userInput.value.trim();
+      if (!text) return;
+      appendMessage('You', text);
+      userInput.value = '';
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text })
+        });
+        const data = await res.json();
+        appendMessage('StudySpace AI', data.reply || 'No response');
+      } catch (err) {
+        appendMessage('Error', 'Unable to connect to AI server.');
+      }
+    }
+
+    function appendMessage(sender, text) {
+      const msg = document.createElement('div');
+      msg.className = 'message';
+      msg.innerHTML = `<strong>${sender}:</strong> ${text}`;
+      messages.appendChild(msg);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    sendBtn.addEventListener('click', sendMessage);
+    userInput.addEventListener('keypress', e => e.key === 'Enter' && sendMessage());
+  </script>
+</body>
+</html>
